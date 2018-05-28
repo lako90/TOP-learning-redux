@@ -36,7 +36,11 @@ class Todo extends Component {
     </Button>
   )
 
-  renderTodo = todo => <ListGroupItem>{todo.title}{this.renderRemove(todo.id)}</ListGroupItem>
+  renderTodo = ({ id, title }) => (
+    <ListGroupItem key={id}>
+      {title}{this.renderRemove(id)}
+    </ListGroupItem>
+  )
 
   render() {
     return (
