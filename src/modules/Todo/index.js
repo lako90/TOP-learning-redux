@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ListGroup, ListGroupItem, Button } from 'reactstrap';
 
+import filterByUserId from './selectors';
 import { addTodo, removeTodo } from './actions';
 
 class Todo extends Component {
@@ -55,7 +56,6 @@ class Todo extends Component {
         >
           {'Add todo'}
         </button> */}
-
         <ListGroup>
           {this.props.todos.map(this.renderTodo)}
         </ListGroup>
@@ -65,7 +65,7 @@ class Todo extends Component {
 }
 
 const mapStateToProps = ({ todo: { data: todos } }, { selectedUserId }) => ({
-  todos: selectedUserId ? todos.filter(todo => todo.userId === selectedUserId) : [],
+  todos: filterByUserId({ todos, selectedUserId }),
 });
 
 const mapDispatchToProps = dispatch => ({
